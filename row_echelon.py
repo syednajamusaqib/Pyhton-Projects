@@ -1,5 +1,15 @@
 import numpy as np
 
+"""
+There are basically four steps in this approach
+Step 1: Check for Non Zero Row
+Step 2: Swap Rows
+Step 3: Make Pivot element of Pivot Row "1"
+Step 4: Eliminate elements below pivots to get Row-Echelon Form  
+"""
+
+# Function to check if matrix is in REF
+
 def is_row_echelon_form(matrix):
     nrows, ncols = matrix.shape
     leading_one_cols = set()
@@ -19,7 +29,7 @@ def is_row_echelon_form(matrix):
                     return False  # Zeros above the leading 1
             
     return True
-
+# Completing Step 1
 def find_nonzero_row(matrix, pivot_row, col):
     nrows = matrix.shape[0]
     for row in range(pivot_row, nrows):
@@ -27,13 +37,19 @@ def find_nonzero_row(matrix, pivot_row, col):
             return row
     return None
 
+# Completing Step 2
+
 def swap_rows(matrix, row1, row2):
     matrix[[row1, row2]] = matrix[[row2, row1]]  
+
+# Completing Step 3
 
 def make_pivot_one(matrix, pivot_row, col):
     pivot_element = matrix[pivot_row, col]
     matrix[pivot_row] //= pivot_element
     # print(pivot_element)
+
+# Completing Step 4
 
 def eliminate_below(matrix, pivot_row, col):
     nrows = matrix.shape[0]
@@ -43,6 +59,8 @@ def eliminate_below(matrix, pivot_row, col):
         # print(factor)
         matrix[row] -= factor * matrix[pivot_row]
         # print(matrix[row])
+
+# Implementing above functions
 
 def row_echelon_form(matrix):
     nrows = matrix.shape[0]
@@ -59,6 +77,8 @@ def row_echelon_form(matrix):
     print(matrix)
     return matrix
 
+# Generating Random matrices for as Test cases
+# It is optional to use this function
 def generate_random_matrix(rows, cols, min_value, max_value):
     return np.random.randint(min_value, max_value + 1, size=(rows, cols), dtype=int)
 
