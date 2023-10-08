@@ -11,24 +11,26 @@ Step 4: Eliminate elements below pivots to get Row-Echelon Form
 # Function to check if matrix is in REF
 
 def is_row_echelon_form(matrix):
-    nrows, ncols = matrix.shape
-    leading_one_cols = set()
+    if not matrix.any():
+        return False
     
-    for row in range(nrows):
-        leading_one_found = False
-        for col in range(ncols):
-            if matrix[row, col] != 0:
-                if col not in leading_one_cols:
-                    leading_one_cols.add(col)
-                    leading_one_found = True
-                else:
-                    return False  # More than one leading 1 in the same column
-        if not leading_one_found:
-            for r in range(row, nrows):
-                if matrix[r, 0] != 0:
-                    return False  # Zeros above the leading 1
-            
+    rows = matrix.shape[0]
+    cols = matrix.shape[1]
+    prev_leading_col = -1
+
+    for row in range(rows):
+        leading_col_found = False
+        for col in range(cols):
+            if matrix[row,col] != 0:
+                if col <= prev_leading_col:
+                    return False
+                prev_leading_col = col
+                leading_col_found = True
+                break
+        if not leading_col_found and any(matrix[row,col] != 0 for col in range(cols)):
+            return False
     return True
+    
 # Completing Step 1
 def find_nonzero_row(matrix, pivot_row, col):
     nrows = matrix.shape[0]
