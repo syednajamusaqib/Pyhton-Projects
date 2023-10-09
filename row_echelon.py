@@ -100,7 +100,7 @@ matrix = np.array([[5,4,0,2],[10,2,5,9],[0,0,0,0]])
 # for i in range(100):
     # matrix = generate_random_matrix(3,4,0,99)
 result = row_echelon_form(matrix)
-if is_row_echelon_form:
+if is_row_echelon_form(result):
         print("In REF")
 else:
         print("Not in REF--------------->")
