@@ -90,7 +90,7 @@ def row_echelon_form(matrix):
     print(matrix)
     return matrix
 
-# Generating Random matrices for as Test cases
+# Generating Random matrices as Test cases
 # It is optional to use this function
 def generate_random_matrix(rows, cols, min_value, max_value):
     return np.random.randint(min_value, max_value + 1, size=(rows, cols), dtype=int)
